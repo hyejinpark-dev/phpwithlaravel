@@ -14,3 +14,23 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/{foo}', function ($foo){
+	return $foo;
+});
+
+#Route::pattern('foo', '[0-9a-zA-Z]{3}');
+Route::get('/{foo?}', function ($foo='bar'){
+	return $foo;
+})->where('foo','[0-9a-zA-Z]{3}');
+
+Route::get('/',[
+	'as' => 'home',
+	function () {
+		return 'home page';
+	}
+]);
+
+Route::get('/home', function() {
+	return redirection(route('home'));
+});
